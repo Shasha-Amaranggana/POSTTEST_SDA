@@ -148,16 +148,20 @@ void selectionSortHargaPerawatan(Perawatan *arr, int jumlah) {
 
 /*PENJELASAN ITERASI FIBONACCI SEARCH
 1. Program membuat deret Fibonacci sampai nilainya >= jumlah data.
-2. Fibonacci digunakan untuk membagi array menjadi beberapa bagian untuk di cek.
+2. Fibonacci digunakan untuk menentukan posisi pembagian array.
 3. Pada setiap iterasi:
    - Program mengecek index = offset + fib2
-   - Jika nilai lebih kecil → cari ke kanan
-   - Jika nilai lebih besar → cari ke kiri
+   - fib2 digunakan sebagai jarak lompatan dari offset.
+   - Jika nilai pada index lebih kecil dari target → cari ke kanan
+   - Jika nilai pada index lebih besar dari target → cari ke kiri
 4. Range pencarian diperkecil menggunakan bilangan Fibonacci berikutnya.
 5. Proses diulang sampai data ditemukan atau range habis.
-6. Jika tersisa 1 elemen, dilakukan pengecekan terakhir.*/
+6. Jika loop selesai dan masih sisa 1 elemen, dilakukan pengecekan terakhir.
+7. Jika target tidak ditemukan sampai akhir, maka fungsi mengembalikan -1.*/
 
 int fibonacciSearchIdPasien(Pasien *arr, int jumlah, int target) {
+    if (jumlah == 0) {
+        return -1;}
     int iterasi = 1; // Inisialisasi iterasi untuk di tampilan terminal
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1; // Inisialisasi untuk menentukan posisi index yang akan dicek
     
@@ -210,6 +214,8 @@ int fibonacciSearchIdPasien(Pasien *arr, int jumlah, int target) {
 }
 
 int fibonacciSearchIdPerawatan(Perawatan *arr, int jumlah, int target) {
+    if (jumlah == 0) {
+        return -1;}
     int iterasi = 1;
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1;
 
@@ -250,6 +256,8 @@ int fibonacciSearchIdPerawatan(Perawatan *arr, int jumlah, int target) {
 }
 
 int fibonacciSearchIdKunjungan(Kunjungan *arr, int jumlah, int target) {
+    if (jumlah == 0) {
+        return -1;}
     int iterasi = 1;
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1;
     
@@ -293,9 +301,9 @@ int fibonacciSearchIdKunjungan(Kunjungan *arr, int jumlah, int target) {
 /*PENJELASAN ALGORITMA/ITERASI LINEAR SEARCH
 1. Linear Search mencari data dari index pertama sampai terakhir.
 2. Setiap iterasi akan mengecek satu per satu elemen array.
-3. Jika data sama dengan target, pencarian berhenti.
-4. Jika belum sama, lanjut ke index berikutnya.
-5. Jika semua data sudah dicek dan tidak ditemukan, maka fungsi mengembalikan -1.*/
+   - Jika data sama dengan target, pencarian berhenti.
+   - Jika belum sama, lanjut ke index berikutnya.
+   - Jika semua data sudah dicek dan target tidak ditemukan, maka fungsi mengembalikan -1.*/
 
 int linearSearchNamaPasien(Pasien *arr, int jumlah, string target) {
     for (int i = 0; i < jumlah; i++) { // Perulangan dari index 0 sampai jumlah data
