@@ -289,46 +289,6 @@ int fibonacciSearchIdKunjungan(Kunjungan *arr, int jumlah, int target) {
     return -1;
 }
 
-int fibonacciSearchIdPasien2(Kunjungan *arr, int jumlah, int target) {
-    int iterasi = 1;
-    int fib2 = 0, fib1 = 1, fib = fib2 + fib1;
-    
-    while (fib < jumlah) {
-        fib2 = fib1; fib1 = fib; fib = fib2 + fib1;}
-    int offset = -1;
-
-    while (fib > 1) {
-        int i;
-        if (offset + fib2 < jumlah - 1) {
-            i = offset + fib2;}
-        else {
-            i = jumlah - 1;}
-        cout << "[Iterasi ke-" << iterasi++ << "]"<< endl;
-        cout << "Cek index: " << i << " | ID: " << (arr + i)->idPasien << endl;
-
-        if ((arr + i)->idPasien < target) {
-            cout << "⤷ ID lebih besar → geser ke kanan\n\n";
-            fib = fib1; fib1 = fib2;
-            fib2 = fib - fib1;
-            offset = i;}
-        else if ((arr + i)->idPasien > target) {
-            cout << "⤷ ID lebih kecil → geser ke kiri\n\n";
-            fib = fib2;
-            fib1 = fib1 - fib2;
-            fib2 = fib - fib1;}
-        else {
-            cout << "⤷ ID ditemukan!\n";
-            return i;}}
-
-    if (fib1 && offset + 1 < jumlah && (arr + offset + 1)->idPasien == target){
-        cout << "Cek terakhir di index: " << offset + 1 << endl;
-        cout << "⤷ ID ditemukan!\n";
-        return offset + 1;}
-
-    cout << "⤷ ID tidak ditemukan!\n";
-    return -1;
-}
-
 
 /*PENJELASAN ALGORITMA/ITERASI LINEAR SEARCH
 1. Linear Search mencari data dari index pertama sampai terakhir.
