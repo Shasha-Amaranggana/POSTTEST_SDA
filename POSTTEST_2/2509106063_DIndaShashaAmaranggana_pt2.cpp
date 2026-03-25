@@ -160,8 +160,6 @@ void selectionSortHargaPerawatan(Perawatan *arr, int jumlah) {
 7. Jika target tidak ditemukan sampai akhir, maka fungsi mengembalikan -1.*/
 
 int fibonacciSearchIdPasien(Pasien *arr, int jumlah, int target) {
-    if (jumlah == 0) {
-        return -1;}
     int iterasi = 1; // Inisialisasi iterasi untuk di tampilan terminal
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1; // Inisialisasi untuk menentukan posisi index yang akan dicek
     
@@ -214,8 +212,6 @@ int fibonacciSearchIdPasien(Pasien *arr, int jumlah, int target) {
 }
 
 int fibonacciSearchIdPerawatan(Perawatan *arr, int jumlah, int target) {
-    if (jumlah == 0) {
-        return -1;}
     int iterasi = 1;
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1;
 
@@ -256,8 +252,6 @@ int fibonacciSearchIdPerawatan(Perawatan *arr, int jumlah, int target) {
 }
 
 int fibonacciSearchIdKunjungan(Kunjungan *arr, int jumlah, int target) {
-    if (jumlah == 0) {
-        return -1;}
     int iterasi = 1;
     int fib2 = 0, fib1 = 1, fib = fib2 + fib1;
     
@@ -483,7 +477,6 @@ void tambahKunjungan(Kunjungan *arr, int &jumlah, Pasien *daftarPasien, int juml
                 return;}}
     }
 }
-
 
 
 void tampilPasien(Pasien *arr, int jumlah) {
