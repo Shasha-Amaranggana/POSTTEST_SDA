@@ -305,6 +305,80 @@ NodePerawatan* linearSearchNamaPerawatan(string target) {
 }
 
 
+void tambahPasienManual(int id, string nama, int umur, string jenis) {
+    NodePasien* baru = new NodePasien;
+    baru->data = {id, nama, umur, jenis};
+    baru->next = NULL;
+    if (headPasien == NULL) headPasien = tailPasien = baru;
+    else {
+        tailPasien->next = baru;
+        tailPasien = baru;}}
+
+void tambahPerawatanManual(int id, string nama, float harga) {
+    NodePerawatan* baru = new NodePerawatan;
+    baru->data = {id, nama, harga};
+    baru->next = NULL;
+    if (headPerawatan == NULL) headPerawatan = tailPerawatan = baru;
+    else {
+        tailPerawatan->next = baru;
+        tailPerawatan = baru;}}
+
+void tambahKunjunganManual(int idKunjungan, int idPasien, int perawatan[], int jumlah) {
+    NodeKunjungan* baru = new NodeKunjungan;
+    baru->data.idKunjungan = idKunjungan;
+    baru->data.idPasien = idPasien;
+    baru->data.jumlahPerawatan = jumlah;
+    for (int i = 0; i < jumlah; i++) {
+        baru->data.idPerawatan[i] = perawatan[i];}
+    baru->next = NULL;
+    if (headKunjungan == NULL) headKunjungan = tailKunjungan = baru;
+    else {
+        tailKunjungan->next = baru;
+        tailKunjungan = baru;}}
+
+void tambahAntrianManual(int no, int idPasien, string nama) {
+    NodeAntrian* baru = new NodeAntrian;
+    baru->data = {no, idPasien, nama};
+    baru->next = NULL;
+    if (front == NULL) front = rear = baru;
+    else {
+        rear->next = baru;
+        rear = baru;}}
+
+void pushRiwayatManual(int id, string nama, string hasil) {
+    NodeRiwayat* baru = new NodeRiwayat;
+    baru->data = {id, nama, hasil};
+    baru->next = top;
+    top = baru;}
+
+void dataDummy() {
+    tambahPasienManual(9001, "Oyin", 6, "Kucing");
+    tambahPasienManual(9002, "Ayen", 6, "Kucing");
+    tambahPasienManual(9003, "Embul", 6, "Kucing");
+    tambahPasienManual(9004, "Bella", 16, "Kucing");
+    tambahPasienManual(9005, "Ochi", 36, "Kucing");
+
+    tambahPerawatanManual(401, "Grooming", 150000);
+    tambahPerawatanManual(402, "Vaksinasi", 200000);
+    tambahPerawatanManual(403, "Konsultasi", 100000);
+    tambahPerawatanManual(404, "Penitipan", 50000);
+    tambahPerawatanManual(405, "Sterilisasi", 500000);
+
+    int p1[] = {401, 402};
+    tambahKunjunganManual(60001, 9001, p1, 2);
+    int p2[] = {403};
+    tambahKunjunganManual(60002, 9002, p2, 1);
+    int p3[] = {404, 405};
+    tambahKunjunganManual(60003, 9003, p3, 2);
+
+    tambahAntrianManual(1, 9001, "Oyin");
+    tambahAntrianManual(2, 9002, "Ayen");
+
+    pushRiwayatManual(9005, "Ochi", "Sehat");
+    pushRiwayatManual(9003, "Embul", "Demam");
+}
+
+
 /* CRUD
 ════════════════════════════════════════════════════*/
 void tambahPasien() {
@@ -460,7 +534,7 @@ void tambahKunjungan() {
             // C. SIMPAN DATA
             else if (pilih == 1) {
                 if (baru->data.jumlahPerawatan == 0) {
-                    tampilPeringatan(68, "Belum ada perawatan!"); system("pause");}
+                    tampilPeringatan(20, "Belum ada perawatan!"); system("pause");}
                 else {
                     if (headKunjungan == NULL) {
                         headKunjungan = tailKunjungan = baru;}
@@ -791,7 +865,7 @@ void menuDataPerawatan() {
                     cout << left
                         << setw(8) << arr[indexPerawatan].idPerawatan << "│ " << setw(44) << arr[indexPerawatan].namaPerawatan << "│ "
                         << setw(13) << arr[indexPerawatan].harga << endl;
-                    cout << right; cout << endl;}
+                    cout << right << endl;}
                 else {
                     tampilPesan(30, "ID perawatan tidak ditemukan!");}
                 cout << endl; system("pause");}
@@ -825,8 +899,8 @@ void menuDataPerawatan() {
                 for (int i = 0; i < jumlah; i++) {
                     cout << left
                         << setw(8) << arr[i].idPerawatan << "│ " << setw(44) << arr[i].namaPerawatan << "│ "
-                        << setw(13) << arr[i].harga << endl;
-                    cout << right << endl;}
+                        << setw(13) << arr[i].harga << endl;}
+                cout << right << endl;
                 system("pause");}
 
             // E. URUTKAN HARGA PERAWATAN
@@ -840,8 +914,8 @@ void menuDataPerawatan() {
                 for (int i = 0; i < jumlah; i++) {
                     cout << left
                         << setw(8) << arr[i].idPerawatan << "│ " << setw(44) << arr[i].namaPerawatan << "│ "
-                        << setw(13) << arr[i].harga << endl;
-                    cout << right << endl;}
+                        << setw(13) << arr[i].harga << endl;}
+                cout << right; cout << endl;
                 system("pause");}
 
             // F. KEMBALI
@@ -986,6 +1060,7 @@ void menuDataRiwayat() {
 ════════════════════════════════════════════════════*/
 int main() {
     SetConsoleOutputCP(65001);
+    dataDummy();
     string menuMain[] = {
         "    『   + Pasien Baru    』",
         "    『   + Antrian Baru   』",
